@@ -10,11 +10,11 @@ html, body {
     padding: 0;
     height: 100%;
     background: #020617;
+    font-family: 'Poppins', sans-serif;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Poppins', sans-serif;
-    color: white;
     overflow: hidden;
 }
 
@@ -35,6 +35,158 @@ body::before {
     100%{background-position:0% 50%;}
 }
 
+/* 💎 STRONG GLASS */
+.box {
+    width: 95%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(35px);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: 
+        0 20px 60px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    text-align: center;
+}
+
+/* ✨ title */
+h1 {
+    font-size: clamp(32px, 7vw, 44px);
+    text-shadow: 0 0 25px rgba(255,255,255,0.8);
+}
+
+/* subtitle */
+.subtitle {
+    font-size: clamp(15px, 4vw, 18px);
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+/* ❤️ button */
+.heart-btn {
+    width: clamp(130px, 35vw, 160px);
+    height: clamp(130px, 35vw, 160px);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.heart-btn span {
+    font-size: clamp(36px, 10vw, 55px);
+}
+
+/* fill */
+.fill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(180deg,#fda4af,#f472b6);
+}
+
+/* 🌸 BETTER FLOWER */
+.leaf {
+    position: fixed;
+    top: -30px;
+    pointer-events: none;
+    animation: fall linear forwards;
+    z-index: -1;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(110vh) translateX(50px) rotate(360deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Sorry Jan ✨</h1>
+    <div class="subtitle">Hold to accept apology 💞</div>
+
+    <div class="heart-btn" id="btn">
+        <div class="fill" id="fill"></div>
+        <span>❤️</span>
+    </div>
+</div>
+
+<!-- 🎵 FIXED MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946c6d1bfa.mp3?filename=love-ambient-124008.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let progress = 0;
+let interval;
+
+const btn = document.getElementById("btn");
+const fill = document.getElementById("fill");
+const music = document.getElementById("bgMusic");
+
+/* 🎵 ensure play */
+function playMusic(){
+    music.volume = 0.6;
+    music.play().catch(()=>{});
+}
+
+function startHold(){
+    playMusic();
+
+    interval = setInterval(()=>{
+        progress += 2;
+        fill.style.height = progress + "%";
+
+        if(progress >= 100){
+            clearInterval(interval);
+            document.body.style.opacity="0";
+            setTimeout(()=>{
+                window.location.href="love.html";
+            },500);
+        }
+    },30);
+}
+
+function stopHold(){
+    clearInterval(interval);
+    progress = 0;
+    fill.style.height = "0%";
+}
+
+btn.addEventListener("mousedown", startHold);
+btn.addEventListener("mouseup", stopHold);
+btn.addEventListener("mouseleave", stopHold);
+btn.addEventListener("touchstart", startHold);
+btn.addEventListener("touchend", stopHold);
+
+/* 🌸 improved sakura */
+setInterval(()=>{
+    let leaf=document.createElement("div");
+    leaf.className="leaf";
+    leaf.innerHTML="🌸";
+
+    leaf.style.left=Math.random()*100+"vw";
+    leaf.style.fontSize=(14+Math.random()*14)+"px";
+    leaf.style.animationDuration=(6+Math.random()*4)+"s";
+
+    document.body.appendChild(leaf);
+    setTimeout(()=>leaf.remove(),10000);
+},500);
+</script>
+
+</body>
+</html>
 /* 💎 box */
 .box {
     width: 92%;
