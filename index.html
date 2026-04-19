@@ -1,106 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sorry Jan 💔</title>
+    <title>Sorry Jan 💔</title>
 
-<style>
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: #020617;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
 
-/* background */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(-45deg, #020617, #0f172a, #1e293b);
-    background-size: 300% 300%;
-    animation: bgMove 18s ease infinite;
-    z-index: -2;
-}
+        /* 🌌 animated bg */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e293b);
+            background-size: 400% 400%;
+            animation: bgMove 18s ease infinite;
+            z-index: -2;
+        }
 
-@keyframes bgMove {
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
+        @keyframes bgMove {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
 
-/* glass */
-.box {
-    width: 95%;
-    max-width: 420px;
-    padding: 35px;
-    border-radius: 22px;
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(25px);
-    text-align: center;
-}
+        /* 💎 glass */
+        .box {
+            text-align: center;
+            padding: 60px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 10px 50px rgba(0,0,0,0.4);
+        }
 
-/* title */
-h1 {
-    font-size: clamp(30px, 7vw, 42px);
-    text-shadow: 0 0 15px rgba(255,255,255,0.7);
-}
+        /* ✨ GLOW WHITE TEXT */
+        h1 {
+            font-size: 42px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            text-shadow: 
+                0 0 10px rgba(255,255,255,0.8),
+                0 0 20px rgba(255,255,255,0.6),
+                0 0 40px rgba(255,255,255,0.4);
+        }
 
-/* subtitle */
-.subtitle {
-    font-size: clamp(14px, 4vw, 16px);
-    opacity: 0.85;
-    margin-bottom: 25px;
-}
+        .subtitle {
+            font-size: 15px;
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
 
-/* button */
-.heart-btn {
-    width: clamp(110px, 30vw, 140px);
-    height: clamp(110px, 30vw, 140px);
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    position: relative;
-    overflow: hidden;
-}
+        /* ❤️ hold button */
+        .heart-btn {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
 
-.heart-btn span {
-    font-size: clamp(32px, 9vw, 50px);
-}
+        .heart-btn span {
+            font-size: 40px;
+            z-index: 2;
+        }
 
-.fill {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 0%;
-    background: linear-gradient(180deg,#fda4af,#f472b6);
-}
+        .fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(180deg, #fda4af, #f472b6);
+            transition: height 0.1s linear;
+        }
 
-/* sakura */
-.leaf {
-    position: fixed;
-    top: -20px;
-    color: #fda4af;
-    animation: fall linear forwards;
-    z-index: -1;
-}
+        /* 🌸 sakura */
+        .leaf {
+            position: fixed;
+            top: -10px;
+            color: #fda4af;
+            animation: fall linear infinite;
+            z-index: -1;
+        }
 
-@keyframes fall {
-    to {
-        transform: translateY(110vh) rotate(360deg);
-    }
-}
-</style>
+        @keyframes fall {
+            0% {transform: translateY(-10vh) rotate(0deg);}
+            100% {transform: translateY(110vh) rotate(360deg);}
+        }
+    </style>
 </head>
 
 <body>
@@ -115,30 +118,26 @@ h1 {
     </div>
 </div>
 
-<audio id="bgMusic" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946c6d1bfa.mp3?filename=love-ambient-124008.mp3">
-</audio>
-
 <script>
 let progress = 0;
 let interval;
 
 const btn = document.getElementById("btn");
 const fill = document.getElementById("fill");
-const music = document.getElementById("bgMusic");
 
 function startHold(){
-    music.play().catch(()=>{});
-
-    interval = setInterval(()=>{
+    interval = setInterval(() => {
         progress += 2;
         fill.style.height = progress + "%";
 
         if(progress >= 100){
             clearInterval(interval);
-            window.location.href="love.html";
+            document.body.style.opacity = "0";
+            setTimeout(()=>{
+                window.location.href = "love.html";
+            },500);
         }
-    },30);
+    }, 30);
 }
 
 function stopHold(){
@@ -153,19 +152,19 @@ btn.addEventListener("mouseleave", stopHold);
 btn.addEventListener("touchstart", startHold);
 btn.addEventListener("touchend", stopHold);
 
-/* sakura */
+/* 🌸 sakura generator */
 setInterval(()=>{
-    let leaf=document.createElement("div");
-    leaf.className="leaf";
-    leaf.innerHTML="🌸";
-
-    leaf.style.left=Math.random()*100+"vw";
-    leaf.style.fontSize=(12+Math.random()*12)+"px";
-    leaf.style.animationDuration=(6+Math.random()*4)+"s";
+    let leaf = document.createElement("div");
+    leaf.className = "leaf";
+    leaf.innerHTML = "🌸";
+    leaf.style.left = Math.random()*100 + "vw";
+    leaf.style.fontSize = (12 + Math.random()*18) + "px";
+    leaf.style.animationDuration = (5 + Math.random()*5) + "s";
 
     document.body.appendChild(leaf);
+
     setTimeout(()=>leaf.remove(),10000);
-},600);
+}, 300);
 </script>
 
 </body>
