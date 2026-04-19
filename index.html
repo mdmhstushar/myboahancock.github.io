@@ -1,102 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sorry Jan 💔</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry Jan 💔</title>
 
-    <!-- ✅ IMPORTANT FOR MOBILE -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #020617;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    overflow: hidden;
+}
 
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            overflow: hidden;
-        }
+/* 🌌 bg */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(-45deg, #020617, #0f172a, #1e293b);
+    background-size: 300% 300%;
+    animation: bgMove 18s ease infinite;
+    z-index: -2;
+}
 
-        body::before {
-            content: "";
-            position: fixed;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(-45deg, #020617, #0f172a, #1e293b);
-            background-size: 400% 400%;
-            animation: bgMove 18s ease infinite;
-            z-index: -2;
-        }
+@keyframes bgMove {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 
-        @keyframes bgMove {
-            0% {background-position: 0% 50%;}
-            50% {background-position: 100% 50%;}
-            100% {background-position: 0% 50%;}
-        }
+/* 💎 box */
+.box {
+    width: 92%;
+    max-width: 420px;
+    padding: 35px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(25px);
+    text-align: center;
+}
 
-        .box {
-            width: 90%;
-            max-width: 420px;
-            padding: 30px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(25px);
-            text-align: center;
-        }
+/* ✨ title */
+h1 {
+    font-size: clamp(30px, 7vw, 42px);
+    text-shadow: 0 0 15px rgba(255,255,255,0.7);
+}
 
-        h1 {
-            font-size: clamp(28px, 6vw, 42px);
-            color: white;
-            text-shadow: 0 0 15px rgba(255,255,255,0.7);
-        }
+.subtitle {
+    font-size: clamp(14px, 4vw, 16px);
+    opacity: 0.85;
+    margin-bottom: 25px;
+}
 
-        .subtitle {
-            font-size: clamp(13px, 3.5vw, 16px);
-            opacity: 0.8;
-            margin-bottom: 20px;
-        }
+/* ❤️ button */
+.heart-btn {
+    width: clamp(110px, 30vw, 140px);
+    height: clamp(110px, 30vw, 140px);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+}
 
-        .heart-btn {
-            width: clamp(90px, 25vw, 120px);
-            height: clamp(90px, 25vw, 120px);
-            border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: auto;
-            position: relative;
-            overflow: hidden;
-        }
+.heart-btn span {
+    font-size: clamp(32px, 9vw, 50px);
+}
 
-        .heart-btn span {
-            font-size: clamp(28px, 8vw, 40px);
-        }
+.fill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(180deg,#fda4af,#f472b6);
+}
 
-        .fill {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 0%;
-            background: linear-gradient(180deg, #fda4af, #f472b6);
-        }
+/* 🌸 sakura */
+.leaf {
+    position: fixed;
+    top: -20px;
+    color: #fda4af;
+    animation: fall linear forwards;
+    z-index: -1;
+}
 
-        /* 🌸 sakura */
-        .leaf {
-            position: fixed;
-            top: -10px;
-            color: #fda4af;
-            animation: fall linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(110vh) rotate(360deg);
-            }
-        }
-    </style>
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+</style>
 </head>
 
 <body>
@@ -111,26 +113,34 @@
     </div>
 </div>
 
+<!-- 🎵 MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3b2c1b2a1b.mp3?filename=romantic-ambient-110624.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 let progress = 0;
 let interval;
 
 const btn = document.getElementById("btn");
 const fill = document.getElementById("fill");
+const music = document.getElementById("bgMusic");
 
 function startHold(){
-    interval = setInterval(() => {
+    music.play(); // 🎵 play music on interaction
+
+    interval = setInterval(()=>{
         progress += 2;
         fill.style.height = progress + "%";
 
         if(progress >= 100){
             clearInterval(interval);
-            document.body.style.opacity = "0";
+            document.body.style.opacity="0";
             setTimeout(()=>{
-                window.location.href = "love.html";
+                window.location.href="love.html";
             },500);
         }
-    }, 30);
+    },30);
 }
 
 function stopHold(){
@@ -147,16 +157,17 @@ btn.addEventListener("touchend", stopHold);
 
 /* 🌸 sakura */
 setInterval(()=>{
-    let leaf = document.createElement("div");
-    leaf.className = "leaf";
-    leaf.innerHTML = "🌸";
-    leaf.style.left = Math.random()*100 + "vw";
-    leaf.style.fontSize = (10 + Math.random()*15) + "px";
-    leaf.style.animationDuration = (6 + Math.random()*5) + "s";
+    let leaf=document.createElement("div");
+    leaf.className="leaf";
+    leaf.innerHTML="🌸";
+
+    leaf.style.left=Math.random()*100+"vw";
+    leaf.style.fontSize=(12+Math.random()*12)+"px";
+    leaf.style.animationDuration=(6+Math.random()*4)+"s";
 
     document.body.appendChild(leaf);
-    setTimeout(()=>leaf.remove(),12000);
-}, 400);
+    setTimeout(()=>leaf.remove(),10000);
+},600);
 </script>
 
 </body>
