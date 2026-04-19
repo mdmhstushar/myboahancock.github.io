@@ -6,17 +6,16 @@
 <title>I Love You ❤️</title>
 
 <style>
-/* 🔥 remove white flash instantly */
 html, body {
     margin: 0;
     padding: 0;
-    background: #020617; /* fallback color */
+    background: #020617;
     font-family: 'Poppins', sans-serif;
     color: #e2e8f0;
     overflow-x: hidden;
 }
 
-/* 🌌 smooth bg */
+/* 🌌 background */
 body::before {
     content: "";
     position: fixed;
@@ -28,29 +27,27 @@ body::before {
 }
 
 @keyframes bgMove {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
-/* 💎 glass container */
+/* 💎 glass box */
 .container {
-    width: 90%;
+    width: 92%;
     max-width: 800px;
-    margin: 40px auto;
+    margin: 30px auto;
     padding: 25px;
     border-radius: 20px;
     background: rgba(255,255,255,0.05);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.1);
 }
 
-/* ✨ glowing title */
+/* ✨ title */
 h1 {
     text-align: center;
+    font-size: clamp(24px, 6vw, 34px);
     color: white;
-    margin-bottom: 25px;
-    font-size: clamp(24px, 6vw, 32px);
     text-shadow: 0 0 15px rgba(255,255,255,0.7);
 }
 
@@ -64,7 +61,6 @@ p {
     animation: fadeIn 0.8s forwards;
 }
 
-/* stagger animation */
 p:nth-child(2){animation-delay:0.2s;}
 p:nth-child(3){animation-delay:0.5s;}
 p:nth-child(4){animation-delay:0.8s;}
@@ -78,20 +74,19 @@ p:nth-child(6){animation-delay:1.4s;}
     }
 }
 
-/* 💖 last line */
+/* 💖 ending */
 .end {
     text-align: center;
     font-size: clamp(18px, 5vw, 22px);
     color: #fda4af;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
-/* 🌸 optimized sakura (low lag) */
+/* 🌸 sakura */
 .leaf {
     position: fixed;
     top: -20px;
     color: #fda4af;
-    opacity: 0.8;
     animation: fall linear forwards;
     z-index: -1;
 }
@@ -135,21 +130,34 @@ p:nth-child(6){animation-delay:1.4s;}
     </p>
 </div>
 
-<script>
-/* 🌸 lightweight sakura (no lag) */
-setInterval(()=>{
-    const leaf = document.createElement("div");
-    leaf.className = "leaf";
-    leaf.innerHTML = "🌸";
+<!-- 🎵 music -->
+<audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3b2c1b2a1b.mp3?filename=romantic-ambient-110624.mp3" type="audio/mpeg">
+</audio>
 
-    leaf.style.left = Math.random()*100 + "vw";
-    leaf.style.fontSize = (10 + Math.random()*12) + "px";
-    leaf.style.animationDuration = (6 + Math.random()*4) + "s";
+<script>
+const music = document.getElementById("bgMusic");
+
+/* 🎵 auto play (works after user interaction from previous page) */
+window.addEventListener("load", ()=>{
+    setTimeout(()=>{
+        music.play().catch(()=>{});
+    },300);
+});
+
+/* 🌸 sakura */
+setInterval(()=>{
+    let leaf=document.createElement("div");
+    leaf.className="leaf";
+    leaf.innerHTML="🌸";
+
+    leaf.style.left=Math.random()*100+"vw";
+    leaf.style.fontSize=(12+Math.random()*12)+"px";
+    leaf.style.animationDuration=(6+Math.random()*4)+"s";
 
     document.body.appendChild(leaf);
-
     setTimeout(()=>leaf.remove(),10000);
-}, 700); // slower = smoother
+},600);
 </script>
 
 </body>
