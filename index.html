@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Sorry Jan 💔</title>
+
     <style>
         body {
             margin: 0;
@@ -9,48 +10,98 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #0f172a, #020617);
-            font-family: Arial;
+            font-family: 'Poppins', sans-serif;
             color: white;
-            text-align: center;
+            overflow: hidden;
         }
 
+        /* 🌌 animated bg */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(-45deg, #020617, #0f172a, #1e293b);
+            background-size: 400% 400%;
+            animation: bgMove 18s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes bgMove {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        /* 💎 glass */
         .box {
-            background: rgba(255,255,255,0.05);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 30px rgba(255, 0, 100, 0.2);
+            text-align: center;
+            padding: 60px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 10px 50px rgba(0,0,0,0.4);
         }
 
+        /* ✨ GLOW WHITE TEXT */
         h1 {
-            font-size: 40px;
-            margin-bottom: 20px;
+            font-size: 42px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            text-shadow: 
+                0 0 10px rgba(255,255,255,0.8),
+                0 0 20px rgba(255,255,255,0.6),
+                0 0 40px rgba(255,255,255,0.4);
         }
 
-        button {
-            padding: 12px 25px;
-            margin: 10px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
+        .subtitle {
+            font-size: 15px;
+            opacity: 0.8;
+            margin-bottom: 25px;
+        }
+
+        /* ❤️ hold button */
+        .heart-btn {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            position: relative;
             cursor: pointer;
+            overflow: hidden;
         }
 
-        .yes {
-            background: #22c55e;
-            color: white;
+        .heart-btn span {
+            font-size: 40px;
+            z-index: 2;
         }
 
-        .no {
-            background: #ef4444;
-            color: white;
-            cursor: not-allowed;
-            opacity: 0.6;
+        .fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(180deg, #fda4af, #f472b6);
+            transition: height 0.1s linear;
         }
 
-        button:hover.yes {
-            transform: scale(1.1);
+        /* 🌸 sakura */
+        .leaf {
+            position: fixed;
+            top: -10px;
+            color: #fda4af;
+            animation: fall linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes fall {
+            0% {transform: translateY(-10vh) rotate(0deg);}
+            100% {transform: translateY(110vh) rotate(360deg);}
         }
     </style>
 </head>
@@ -58,16 +109,63 @@
 <body>
 
 <div class="box">
-    <h1>Sorry Jan 😔</h1>
+    <h1>Sorry Jan ✨</h1>
+    <div class="subtitle">Hold to accept apology 💞</div>
 
-    <button class="yes" onclick="window.location.href='love.html'">
-        Sorry Accepted 💚
-    </button>
-
-    <button class="no">
-        Sorry Not Accepted 💔
-    </button>
+    <div class="heart-btn" id="btn">
+        <div class="fill" id="fill"></div>
+        <span>❤️</span>
+    </div>
 </div>
+
+<script>
+let progress = 0;
+let interval;
+
+const btn = document.getElementById("btn");
+const fill = document.getElementById("fill");
+
+function startHold(){
+    interval = setInterval(() => {
+        progress += 2;
+        fill.style.height = progress + "%";
+
+        if(progress >= 100){
+            clearInterval(interval);
+            document.body.style.opacity = "0";
+            setTimeout(()=>{
+                window.location.href = "love.html";
+            },500);
+        }
+    }, 30);
+}
+
+function stopHold(){
+    clearInterval(interval);
+    progress = 0;
+    fill.style.height = "0%";
+}
+
+btn.addEventListener("mousedown", startHold);
+btn.addEventListener("mouseup", stopHold);
+btn.addEventListener("mouseleave", stopHold);
+btn.addEventListener("touchstart", startHold);
+btn.addEventListener("touchend", stopHold);
+
+/* 🌸 sakura generator */
+setInterval(()=>{
+    let leaf = document.createElement("div");
+    leaf.className = "leaf";
+    leaf.innerHTML = "🌸";
+    leaf.style.left = Math.random()*100 + "vw";
+    leaf.style.fontSize = (12 + Math.random()*18) + "px";
+    leaf.style.animationDuration = (5 + Math.random()*5) + "s";
+
+    document.body.appendChild(leaf);
+
+    setTimeout(()=>leaf.remove(),10000);
+}, 300);
+</script>
 
 </body>
 </html>
