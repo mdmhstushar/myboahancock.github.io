@@ -3,6 +3,9 @@
 <head>
     <title>Sorry Jan 💔</title>
 
+    <!-- ✅ IMPORTANT FOR MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             margin: 0;
@@ -15,7 +18,6 @@
             overflow: hidden;
         }
 
-        /* 🌌 animated bg */
         body::before {
             content: "";
             position: fixed;
@@ -33,38 +35,31 @@
             100% {background-position: 0% 50%;}
         }
 
-        /* 💎 glass */
         .box {
-            text-align: center;
-            padding: 60px;
-            border-radius: 25px;
+            width: 90%;
+            max-width: 420px;
+            padding: 30px;
+            border-radius: 20px;
             background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255,255,255,0.12);
-            box-shadow: 0 10px 50px rgba(0,0,0,0.4);
+            backdrop-filter: blur(25px);
+            text-align: center;
         }
 
-        /* ✨ GLOW WHITE TEXT */
         h1 {
-            font-size: 42px;
-            margin-bottom: 25px;
-            color: #ffffff;
-            text-shadow: 
-                0 0 10px rgba(255,255,255,0.8),
-                0 0 20px rgba(255,255,255,0.6),
-                0 0 40px rgba(255,255,255,0.4);
+            font-size: clamp(28px, 6vw, 42px);
+            color: white;
+            text-shadow: 0 0 15px rgba(255,255,255,0.7);
         }
 
         .subtitle {
-            font-size: 15px;
+            font-size: clamp(13px, 3.5vw, 16px);
             opacity: 0.8;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
-        /* ❤️ hold button */
         .heart-btn {
-            width: 120px;
-            height: 120px;
+            width: clamp(90px, 25vw, 120px);
+            height: clamp(90px, 25vw, 120px);
             border-radius: 50%;
             background: rgba(255,255,255,0.08);
             display: flex;
@@ -72,13 +67,11 @@
             align-items: center;
             margin: auto;
             position: relative;
-            cursor: pointer;
             overflow: hidden;
         }
 
         .heart-btn span {
-            font-size: 40px;
-            z-index: 2;
+            font-size: clamp(28px, 8vw, 40px);
         }
 
         .fill {
@@ -87,7 +80,6 @@
             width: 100%;
             height: 0%;
             background: linear-gradient(180deg, #fda4af, #f472b6);
-            transition: height 0.1s linear;
         }
 
         /* 🌸 sakura */
@@ -100,8 +92,9 @@
         }
 
         @keyframes fall {
-            0% {transform: translateY(-10vh) rotate(0deg);}
-            100% {transform: translateY(110vh) rotate(360deg);}
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -152,19 +145,18 @@ btn.addEventListener("mouseleave", stopHold);
 btn.addEventListener("touchstart", startHold);
 btn.addEventListener("touchend", stopHold);
 
-/* 🌸 sakura generator */
+/* 🌸 sakura */
 setInterval(()=>{
     let leaf = document.createElement("div");
     leaf.className = "leaf";
     leaf.innerHTML = "🌸";
     leaf.style.left = Math.random()*100 + "vw";
-    leaf.style.fontSize = (12 + Math.random()*18) + "px";
-    leaf.style.animationDuration = (5 + Math.random()*5) + "s";
+    leaf.style.fontSize = (10 + Math.random()*15) + "px";
+    leaf.style.animationDuration = (6 + Math.random()*5) + "s";
 
     document.body.appendChild(leaf);
-
-    setTimeout(()=>leaf.remove(),10000);
-}, 300);
+    setTimeout(()=>leaf.remove(),12000);
+}, 400);
 </script>
 
 </body>
