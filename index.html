@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sorry Jan 💔</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f172a, #020617);
+            font-family: Arial;
+            color: white;
+            text-align: center;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(255, 0, 100, 0.2);
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .yes {
+            background: #22c55e;
+            color: white;
+        }
+
+        .no {
+            background: #ef4444;
+            color: white;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        button:hover.yes {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Sorry Jan 😔</h1>
+
+    <button class="yes" onclick="window.location.href='love.html'">
+        Sorry Accepted 💚
+    </button>
+
+    <button class="no">
+        Sorry Not Accepted 💔
+    </button>
+</div>
+
+</body>
+</html>
